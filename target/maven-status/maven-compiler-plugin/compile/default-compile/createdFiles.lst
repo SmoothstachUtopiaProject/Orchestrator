@@ -1,9 +1,0 @@
-<<<<<<< HEAD
-com/ss/orchestrator/OrchestratorController.class
-com/ss/orchestrator/OrchestratorApplication.class
-com/ss/orchestrator/SimpleCORSFilter.class
-=======
-com\ss\orchestrator\SimpleCORSFilter.class
-com\ss\orchestrator\OrchestratorApplication.class
-com\ss\orchestrator\OrchestratorController.class
->>>>>>> 4096b25194876b380b06c0c9096831a3525db151
