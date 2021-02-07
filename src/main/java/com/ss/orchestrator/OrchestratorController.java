@@ -1,10 +1,15 @@
 package com.ss.orchestrator;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collections;
+=======
+>>>>>>> 4096b25194876b380b06c0c9096831a3525db151
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +23,10 @@ import org.springframework.web.client.RestTemplate;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@RequestMapping(
+	produces = { "application/json", "application/xml", "text/xml" },
+	consumes = MediaType.ALL_VALUE
+)
 public class OrchestratorController {
 
 	private final String SERVICE_PATH_ORCHESTRATOR = "http://localhost:8080";
@@ -26,6 +35,12 @@ public class OrchestratorController {
 	private final String SERVICE_PATH_USERS = "http://USER-SERVICE";
 
 	@Autowired
+<<<<<<< HEAD
+=======
+	DiscoveryClient discoveryClient;
+
+  @Autowired
+>>>>>>> 4096b25194876b380b06c0c9096831a3525db151
 	RestTemplate restTemplate;
 
 	@RequestMapping(path = { "/airports", "/airports/*" })
@@ -45,6 +60,14 @@ public class OrchestratorController {
 	public ResponseEntity<Object> users(RequestEntity<Object> incomingRequest) {
 		String newURI = incomingRequest.getUrl().toString().replace(SERVICE_PATH_ORCHESTRATOR, SERVICE_PATH_USERS);
 		return rerouteToService(incomingRequest, newURI);
+	}
+
+	@RequestMapping(path = { "/services"})
+	public ResponseEntity<String> services(RequestEntity<String> incomingRequest) {
+		List<String> services = discoveryClient.getServices();
+		return services != null
+		? new ResponseEntity<>(services.toString(), HttpStatus.OK)
+		: new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
 
 	private ResponseEntity<Object> rerouteToService(RequestEntity<Object> incomingRequest, String newURI) {
