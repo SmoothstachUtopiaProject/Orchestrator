@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class OrchestratorController {
 
@@ -53,7 +53,6 @@ public class OrchestratorController {
 		try {
 			return restTemplate.exchange(outgoingRequest, Object.class);
 		} catch (HttpStatusCodeException e) {
-			System.out.println("\nerror called");
 			return ResponseEntity.status(e.getRawStatusCode())
 			.headers(e.getResponseHeaders())
 			.body(e.getResponseBodyAsString());
