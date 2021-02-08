@@ -33,17 +33,17 @@ public class OrchestratorController {
   @Autowired
 	RestTemplate restTemplate;
   
-  @RequestMapping(path = { "/airports", "/airports/*" })
+  @RequestMapping(path = { "/airports", "/airports/**" })
 	public ResponseEntity<String> airports(RequestEntity<String> incomingRequest) {
 		return rerouteToService(incomingRequest, SERVICE_PATH_AIRPORTS);
 	}
 
-	@RequestMapping(path = { "/routes", "/routes/*" })
+	@RequestMapping(path = { "/routes", "/routes/**" })
 	public ResponseEntity<String> routes(RequestEntity<String> incomingRequest) {
 		return rerouteToService(incomingRequest, SERVICE_PATH_ROUTES);
 	}
 
-	@RequestMapping(path = { "/users", "/users/*" })
+	@RequestMapping(path = { "/users", "/users/**" })
 	public ResponseEntity<String> users(RequestEntity<String> incomingRequest) {
 		return rerouteToService(incomingRequest, SERVICE_PATH_USERS);
 	}
