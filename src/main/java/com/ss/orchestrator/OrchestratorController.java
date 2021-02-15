@@ -26,6 +26,7 @@ public class OrchestratorController {
 	private final String SERVICE_PATH_AIRPORTS = "http://AIRPORT-SERVICE";
 	private final String SERVICE_PATH_ROUTES = "http://ROUTE-SERVICE";
 	private final String SERVICE_PATH_USERS = "http://USER-SERVICE";
+	private final String SERVICE_PATH_FLIGHTS = "http://FLIGHT-SERVICE";
 
 	@Autowired
 	DiscoveryClient discoveryClient;
@@ -47,6 +48,12 @@ public class OrchestratorController {
 	public ResponseEntity<String> users(RequestEntity<String> incomingRequest) {
 		return rerouteToService(incomingRequest, SERVICE_PATH_USERS);
 	}
+	
+	@RequestMapping(path = { "/flights", "/flights/**" })
+	public ResponseEntity<String> flights(RequestEntity<String> incomingRequest) {
+		return rerouteToService(incomingRequest, SERVICE_PATH_FLIGHTS);
+	}
+
 
 	@RequestMapping(path = { "/services"})
 	public ResponseEntity<String> services(RequestEntity<String> incomingRequest) {
