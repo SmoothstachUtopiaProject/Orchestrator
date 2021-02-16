@@ -24,6 +24,7 @@ public class OrchestratorController {
 
 	private final String SERVICE_PATH_ORCHESTRATOR = "http://localhost:8080";
 	private final String SERVICE_PATH_AIRPORTS = "http://AIRPORT-SERVICE";
+	private final String SERVICE_PATH_BOOKINGS = "http://BOOKING-SERVICE";
 	private final String SERVICE_PATH_ROUTES = "http://ROUTE-SERVICE";
 	private final String SERVICE_PATH_USERS = "http://USER-SERVICE";
 
@@ -48,8 +49,13 @@ public class OrchestratorController {
 		return rerouteToService(incomingRequest, SERVICE_PATH_USERS);
 	}
 
+	@RequestMapping(path = { "/bookings", "/bookings/**" })
+	public ResponseEntity<String> bookings(RequestEntity<String> incomingRequest) {
+		return rerouteToService(incomingRequest, SERVICE_PATH_BOOKINGS);
+	}
+
 	@RequestMapping(path = { "/services"})
-	public ResponseEntity<String> services(RequestEntity<String> incomingRequest) {
+	public ResponseEntity<Object> services(RequestEntity<String> incomingRequest) {
 		List<String> services = discoveryClient.getServices();
 		return services != null
 		? new ResponseEntity<>(services.toString(), HttpStatus.OK)
